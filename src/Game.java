@@ -1,14 +1,19 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class Game {
     JFrame window;
     Container con;
-    JPanel titleNamePanel, startButtonPanel;
+    JPanel titleNamePanel, startButtonPanel, mainTextPanel;
     JLabel titleNameLabel;
     Font titleFont = new Font("Times New Roman", Font.PLAIN, 50); // could change later
     Font normalFont = new Font("Times New Roman", Font.PLAIN, 30);
     JButton startButton;
+    JTextArea mainTextArea;
+
+    TitleScreenHandler tshandler = new TitleScreenHandler(); // action listener
 
     public static void main(String[] args) {
         new Game();
@@ -40,6 +45,7 @@ public class Game {
         startButton.setBackground(Color.black); // color of button
         startButton.setForeground(Color.white); // color text
         startButton.setFont(normalFont);
+        startButton.addActionListener(tshandler); // title screen handler
 
 
         titleNamePanel.add(titleNameLabel); // add the label to the panel
@@ -48,4 +54,31 @@ public class Game {
         con.add(titleNamePanel);
         con.add(startButtonPanel);
     }
+
+    public void createGameScreen() {
+        titleNamePanel.setVisible(false);
+        startButtonPanel.setVisible(false);
+
+        mainTextPanel = new JPanel();
+        mainTextPanel.setBounds(100, 100, 600, 250);
+        mainTextPanel.setBackground(Color.blue);
+        con.add(mainTextPanel);
+
+        mainTextArea = new JTextArea("You are an adventurer trapped in Dio's Dungeon; find a way out with your life intact!");
+        mainTextArea.setBounds(100, 100, 600, 250);
+        mainTextArea.setBackground(Color.black);
+        mainTextArea.setForeground(Color.white); // text color
+        mainTextArea.setFont(normalFont);
+        mainTextArea.setLineWrap(true);
+
+        mainTextPanel.add(mainTextArea);
+    }
+
+
+    public class TitleScreenHandler implements ActionListener{
+        public void actionPerformed(ActionEvent event){
+            createGameScreen();
+        }
+    }
+
 }
