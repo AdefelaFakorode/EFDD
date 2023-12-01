@@ -64,7 +64,7 @@ public class Game {
         mainTextPanel.setBackground(Color.blue);
         con.add(mainTextPanel);
 
-        mainTextArea = new JTextArea("You are an adventurer trapped in Dio's Dungeon; find a way out with your life intact!");
+        mainTextArea = new JTextArea("You're an adventurer trapped in Dio's Dungeon. Find a way out with your life intact!");
         mainTextArea.setBounds(100, 100, 600, 250);
         mainTextArea.setBackground(Color.black);
         mainTextArea.setForeground(Color.white); // text color
