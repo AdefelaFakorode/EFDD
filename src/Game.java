@@ -18,11 +18,11 @@ public class Game {
     // Font for general text
     Font normalFont = new Font("Times New Roman", Font.PLAIN, 30);
 
-    Font smallFont = new Font("Times New Roman", Font.PLAIN, 15);
+    Font smallFont = new Font("Times New Roman", Font.PLAIN, 20);
 
     // Buttons and text area
-    JButton startButton, continueButton, chapterOneContinueButton, eventOneContinueButton;
-    JTextArea mainTextArea;
+    JButton startButton, continueButton, chapterOneContinueButton;
+    JTextArea mainTextArea, eventOneTextArea;
 
     // Action listeners for handling button clicks
     TitleScreenHandler tshandler = new TitleScreenHandler();
@@ -76,7 +76,7 @@ public class Game {
     }
 
     // Method to create the main game screen
-    public void createGameScreen() {
+    public void GameScreen() {
         titleNamePanel.setVisible(false);
         startButtonPanel.setVisible(false);
 
@@ -113,7 +113,7 @@ public class Game {
     }
 
     // Method to create screen for Chapter One
-    public void createChapterOneScreen() {
+    public void ChapterOneScreen() {
         // Hide prev panels
         mainTextPanel.setVisible(false);
         continueButtonPanel.setVisible(false);
@@ -155,33 +155,45 @@ public class Game {
         chapterOneContinueButtonPanel.setVisible(false);
         chapterOneContinueButton.setVisible(false);
 
-        // Main text panel setup
+        // Panel setup
+
         EventOnePanel = new JPanel();
-        EventOnePanel.setBounds(80,150, 1100, 300);
+        EventOnePanel.setBounds(80,150,1100,300);
         EventOnePanel.setBackground(Color.blue);
         con.add(EventOnePanel);
 
-        // Event one label setup
-        JLabel EventOneLabel = new JLabel("You wake up and find yourself in a caged cell with a guard in front of the cell door..." +
+        // Text area setup
+        eventOneTextArea = new JTextArea("You wake up and find yourself in a caged cell with a guard in front of the cell door..." +
                 "\nYou notice that the guard didn't take your pocket knife concealed around your ankle\n" +
                 "Along side you, across the room is a kid around the age of 14\n" +
                 "Before you could say a word to him...a guard barges into the cell and tries to take the kid away.\n" +
                 "You have 2 choices...either leave the kid to be taken away...or help him...");
-        EventOneLabel.setForeground(Color.white);
-        EventOneLabel.setFont(smallFont);
-        EventOnePanel.add(EventOneLabel);
+        eventOneTextArea.setBounds(100, 200, 810, 800);
+        eventOneTextArea.setBackground(Color.black);
+        eventOneTextArea.setForeground(Color.white);
+        eventOneTextArea.setFont(smallFont);
+        eventOneTextArea.setLineWrap(true);
+        EventOnePanel.add(eventOneTextArea);
+
+        //which do you choose?
+
+        //option 1
+
+        //option 2
+
+
     }
 
     // Action listener class for handling button clicks
     public class TitleScreenHandler implements ActionListener {
         public void actionPerformed(ActionEvent event) {
-            createGameScreen();
+            GameScreen();
         }
     }
 
     public class ContinueButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent event) {
-            createChapterOneScreen();
+            ChapterOneScreen();
         }
     }
 
