@@ -9,7 +9,7 @@ public class Game {
     Container con;
 
     // Panels for different sections of the game
-    JPanel titleNamePanel, startButtonPanel, mainTextPanel, continueButtonPanel;
+    JPanel titleNamePanel, startButtonPanel, mainTextPanel, continueButtonPanel, ChapterOnePanel;
 
     // Label and font for game title
     JLabel titleNameLabel;
@@ -24,8 +24,7 @@ public class Game {
 
     // Action listener for handling button clicks
     TitleScreenHandler tshandler = new TitleScreenHandler(); // Action listener
-
-    // Main method to launch the game
+    ContinueButtonHandler cbhandler = new ContinueButtonHandler(); // Action listener for continue button
     public static void main(String[] args) {
         new Game();
     }
@@ -97,6 +96,9 @@ public class Game {
         continueButtonPanel.setBackground(Color.red);
         continueButtonPanel.setForeground(Color.white);
         continueButtonPanel.setFont((normalFont));
+
+
+        //add panel button panel to container
         con.add(continueButtonPanel);
 
         continueButton = new JButton("CONTINUE");
@@ -104,12 +106,40 @@ public class Game {
         continueButton.setForeground(Color.white);
         continueButton.setFont(normalFont);
         continueButtonPanel.add(continueButton);
+        continueButton.addActionListener(cbhandler); //attaching ContinueButtonHandler
     }
+
+    // Method to create screen for Chapter One
+    public void createChapterOneScreen(){
+        //hide prev panels
+        mainTextPanel.setVisible(false);
+        continueButtonPanel.setVisible(false);
+
+        //chapter one label setup
+        ChapterOnePanel = new JPanel();
+        ChapterOnePanel.setBounds(400, 250, 500, 200);
+        ChapterOnePanel.setBackground(Color.blue);
+        con.add(ChapterOnePanel);
+
+        //chapter one label setup
+        JLabel chapterOneLabel = new JLabel("Chapter One: Exodus");
+        chapterOneLabel.setForeground(Color.white);
+        chapterOneLabel.setFont(titleFont);
+        ChapterOnePanel.add(chapterOneLabel);
+    }
+
+
 
     // Action listener class for handling button clicks
     public class TitleScreenHandler implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             createGameScreen();
+        }
+    }
+
+    public class ContinueButtonHandler implements ActionListener{
+        public void actionPerformed(ActionEvent event){
+            createChapterOneScreen();
         }
     }
 }
