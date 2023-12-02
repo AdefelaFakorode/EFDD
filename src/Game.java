@@ -9,7 +9,7 @@ public class Game {
     Container con;
 
     // Panels for different sections of the game
-    JPanel titleNamePanel, startButtonPanel, mainTextPanel;
+    JPanel titleNamePanel, startButtonPanel, mainTextPanel, continueButtonPanel;
 
     // Label and font for game title
     JLabel titleNameLabel;
@@ -19,7 +19,7 @@ public class Game {
     Font normalFont = new Font("Times New Roman", Font.PLAIN, 30);
 
     // Buttons and text area
-    JButton startButton;
+    JButton startButton, continueButton;
     JTextArea mainTextArea;
 
     // Action listener for handling button clicks
@@ -80,7 +80,7 @@ public class Game {
         // Main text panel setup
         mainTextPanel = new JPanel();
         mainTextPanel.setBounds(100, 100, 600, 250);
-        mainTextPanel.setBackground(Color.blue);
+        mainTextPanel.setBackground(Color.black);
         con.add(mainTextPanel);
 
         // Main text area setup
@@ -90,8 +90,20 @@ public class Game {
         mainTextArea.setForeground(Color.white); // Text color
         mainTextArea.setFont(normalFont);
         mainTextArea.setLineWrap(true);
-
         mainTextPanel.add(mainTextArea);
+
+        continueButtonPanel = new JPanel();
+        continueButtonPanel.setBounds(250, 350, 300, 150);
+        continueButtonPanel.setBackground(Color.black);
+        continueButtonPanel.setForeground(Color.white);
+        continueButtonPanel.setFont((normalFont));
+        con.add(continueButtonPanel);
+
+        continueButton = new JButton("CONTINUE");
+        continueButton.setBackground(Color.black);
+        continueButton.setForeground(Color.white);
+        continueButton.setFont(normalFont);
+        continueButtonPanel.add(continueButton);
     }
 
     // Action listener class for handling button clicks
