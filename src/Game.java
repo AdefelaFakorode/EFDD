@@ -34,7 +34,7 @@ public class Game {
     public Game() {
         // Creating window for the game
         window = new JFrame();
-        window.setSize(800, 600); // Size of the window, can make 1280x720 another time
+        window.setSize(1280, 720); // Size of the window, can make 1280x720 another time
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 'x' button to close the window
         window.getContentPane().setBackground(Color.black);
         window.setLayout(null); // Default layout for now
@@ -43,8 +43,8 @@ public class Game {
 
         // Title panel setup
         titleNamePanel = new JPanel();
-        titleNamePanel.setBounds(100, 100, 600, 70); // (x , y, width, height)
-        titleNamePanel.setBackground(Color.black);
+        titleNamePanel.setBounds(80, 150, 1100, 70); // (x , y, width, height)
+        titleNamePanel.setBackground(Color.blue);
 
         // Game title label setup
         titleNameLabel = new JLabel("Escape From Dio's Dungeon"); // Text
@@ -53,12 +53,12 @@ public class Game {
 
         // Start button panel setup
         startButtonPanel = new JPanel();
-        startButtonPanel.setBounds(300, 400, 200, 100);
+        startButtonPanel.setBounds(520, 500, 200, 100);
         startButtonPanel.setBackground(Color.black);
 
         // Start button setup
         startButton = new JButton("START");
-        startButton.setBackground(Color.black); // Color of the button
+        startButton.setBackground(Color.red); // Color of the button
         startButton.setForeground(Color.white); // Color of the text
         startButton.setFont(normalFont);
         startButton.addActionListener(tshandler); // Title screen handler
@@ -79,13 +79,13 @@ public class Game {
 
         // Main text panel setup
         mainTextPanel = new JPanel();
-        mainTextPanel.setBounds(100, 100, 600, 250);
-        mainTextPanel.setBackground(Color.black);
+        mainTextPanel.setBounds(80, 150, 1100, 120);
+        mainTextPanel.setBackground(Color.blue);
         con.add(mainTextPanel);
 
         // Main text area setup
-        mainTextArea = new JTextArea("Trapped in Dio's Dungeon, rely on your wit and \n courage to navigate puzzles and evade traps, ensuring your escape with your life intact.");
-        mainTextArea.setBounds(100, 100, 600, 250);
+        mainTextArea = new JTextArea("Trapped in Dio's Dungeon, rely on your wit and courage to navigate puzzles and evade traps, ensuring your escape with your life intact.");
+        mainTextArea.setBounds(100, 200, 810, 850);
         mainTextArea.setBackground(Color.black);
         mainTextArea.setForeground(Color.white); // Text color
         mainTextArea.setFont(normalFont);
@@ -93,8 +93,8 @@ public class Game {
         mainTextPanel.add(mainTextArea);
 
         continueButtonPanel = new JPanel();
-        continueButtonPanel.setBounds(250, 350, 300, 150);
-        continueButtonPanel.setBackground(Color.black);
+        continueButtonPanel.setBounds(520, 500, 200, 100);
+        continueButtonPanel.setBackground(Color.red);
         continueButtonPanel.setForeground(Color.white);
         continueButtonPanel.setFont((normalFont));
         con.add(continueButtonPanel);
