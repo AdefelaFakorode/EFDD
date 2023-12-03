@@ -9,8 +9,8 @@ public class Game {
     Container con;
 
     // Panels for different sections of the game
-    JPanel titleNamePanel, startButtonPanel, mainTextPanel, continueButtonPanel, ChapterOnePanel, EventOnePanel, chapterOneContinueButtonPanel,
-    playerPanel;
+    JPanel titleNamePanel, startButtonPanel, mainTextPanel, continueButtonPanel, ChapterOnePanel, EventOnePanel,
+            chapterOneContinueButtonPanel, playerPanel, eventOneOptionsPanel;
 
     // Label and font for game title
     JLabel titleNameLabel, hpLabel, hpLabelNumber, weaponLabel, weaponLabelName;
@@ -22,7 +22,8 @@ public class Game {
     Font smallFont = new Font("Times New Roman", Font.PLAIN, 22);
 
     // Buttons and text area
-    JButton startButton, continueButton, chapterOneContinueButton;
+    JButton startButton, continueButton, chapterOneContinueButton,
+    optionOneButton, optionTwoButton;
     JTextArea mainTextArea, eventOneTextArea;
 
     int playerHP;
@@ -33,6 +34,7 @@ public class Game {
     ContinueButtonHandler cbhandler = new ContinueButtonHandler();
     ChapterOneContinueHandler cc1handler = new ChapterOneContinueHandler();
 
+    OptionOneHandler o1handler = new OptionOneHandler();
     public static void main(String[] args) {
         new Game();
     }
@@ -161,7 +163,7 @@ public class Game {
 
         // Creating player health bar and weapon
         playerPanel = new JPanel();
-        playerPanel.setBounds(140,15,1000,50);
+        playerPanel.setBounds(180,15,1000,50);
         playerPanel.setBackground(Color.black);
         playerPanel.setLayout(new GridLayout(1,4));
         con.add(playerPanel);
@@ -188,7 +190,7 @@ public class Game {
         // Panel setup
         EventOnePanel = new JPanel();
         EventOnePanel.setBounds(80,150,1100,300);
-        EventOnePanel.setBackground(Color.black);
+        EventOnePanel.setBackground(Color.blue);
         con.add(EventOnePanel);
 
         // Text area setup
@@ -211,7 +213,22 @@ public class Game {
         eventOneTextArea.setLineWrap(true);
         EventOnePanel.add(eventOneTextArea);
 
+
+
+        // Option panels
+        eventOneOptionsPanel = new JPanel();
+        eventOneOptionsPanel.setBounds(100,500,800,300);
+        eventOneOptionsPanel.setBackground(Color.red);
+
         //option 1
+        optionOneButton = new JButton("SAVE THE KID");
+        optionOneButton.setBackground(Color.black);
+        optionOneButton.setForeground(Color.white);
+        optionOneButton.setFont(normalFont);
+        optionOneButton.addActionListener(o1handler);
+        eventOneOptionsPanel.add(optionOneButton);
+
+        con.add(eventOneOptionsPanel);
 
         //option 2
 
@@ -239,6 +256,12 @@ public class Game {
 
     public class ChapterOneContinueHandler implements ActionListener {
         public void actionPerformed(ActionEvent event) {
+            EventOneScreen();
+        }
+    }
+
+    public class OptionOneHandler implements ActionListener{
+        public void actionPerformed(ActionEvent event){
             EventOneScreen();
         }
     }
