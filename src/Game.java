@@ -25,6 +25,9 @@ public class Game {
     JButton startButton, continueButton, chapterOneContinueButton;
     JTextArea mainTextArea, eventOneTextArea;
 
+    int playerHP;
+    String weapon;
+
     // Action listeners for handling button clicks
     TitleScreenHandler tshandler = new TitleScreenHandler();
     ContinueButtonHandler cbhandler = new ContinueButtonHandler();
@@ -159,7 +162,7 @@ public class Game {
         // Creating player health bar and weapon
         playerPanel = new JPanel();
         playerPanel.setBounds(140,15,1000,50);
-        playerPanel.setBackground(Color.blue);
+        playerPanel.setBackground(Color.black);
         playerPanel.setLayout(new GridLayout(1,4));
         con.add(playerPanel);
         hpLabel = new JLabel("HP: ");
@@ -175,13 +178,14 @@ public class Game {
         weaponLabel.setFont(normalFont);
         weaponLabel.setForeground(Color.white);
         playerPanel.add(weaponLabel);
-        weaponLabelName = new JLabel("Pocket-Knife");
+        weaponLabelName = new JLabel();
         weaponLabelName.setFont(normalFont);
         weaponLabelName.setForeground(Color.white);
         playerPanel.add(weaponLabelName);
 
-        // Panel setup
+        playerSetUp();
 
+        // Panel setup
         EventOnePanel = new JPanel();
         EventOnePanel.setBounds(80,150,1100,300);
         EventOnePanel.setBackground(Color.black);
@@ -212,6 +216,12 @@ public class Game {
         //option 2
 
 
+    }
+
+    public void playerSetUp(){
+        playerHP = 15;
+        weapon = "Pocket-Knife";
+        weaponLabelName.setText(weapon);
     }
 
     // Action listener class for handling button clicks
