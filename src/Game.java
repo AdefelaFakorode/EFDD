@@ -13,7 +13,7 @@ public class Game {
     playerPanel;
 
     // Label and font for game title
-    JLabel titleNameLabel, hpLabel, hpLabelNumber, weaponLabel, weaponLabelNumber;
+    JLabel titleNameLabel, hpLabel, hpLabelNumber, weaponLabel, weaponLabelName;
     Font titleFont = new Font("Times New Roman", Font.PLAIN, 50);
 
     // Font for general text
@@ -111,13 +111,6 @@ public class Game {
         continueButton.setFont(normalFont);
         continueButtonPanel.add(continueButton);
         continueButton.addActionListener(cbhandler);
-
-        // Creating player health bar and weapon
-        playerPanel = new JPanel();
-        playerPanel.setBounds(140,15,1000,50);
-        playerPanel.setBackground(Color.blue);
-        playerPanel.setLayout(new GridLayout(1,4));
-        con.add(playerPanel);
     }
 
     // Method to create screen for Chapter One
@@ -162,6 +155,30 @@ public class Game {
         ChapterOnePanel.setVisible(false);
         chapterOneContinueButtonPanel.setVisible(false);
         chapterOneContinueButton.setVisible(false);
+
+        // Creating player health bar and weapon
+        playerPanel = new JPanel();
+        playerPanel.setBounds(140,15,1000,50);
+        playerPanel.setBackground(Color.blue);
+        playerPanel.setLayout(new GridLayout(1,4));
+        con.add(playerPanel);
+        hpLabel = new JLabel("HP: ");
+        hpLabel.setFont(normalFont);
+        hpLabel.setForeground(Color.white);
+        playerPanel.add(hpLabel);
+        hpLabelNumber = new JLabel("10");
+        hpLabelNumber.setFont(normalFont);
+        hpLabelNumber.setForeground(Color.white);
+        playerPanel.add(hpLabelNumber);
+
+        weaponLabel = new JLabel("Weapon:");
+        weaponLabel.setFont(normalFont);
+        weaponLabel.setForeground(Color.white);
+        playerPanel.add(weaponLabel);
+        weaponLabelName = new JLabel("Pocket-Knife");
+        weaponLabelName.setFont(normalFont);
+        weaponLabelName.setForeground(Color.white);
+        playerPanel.add(weaponLabelName);
 
         // Panel setup
 
