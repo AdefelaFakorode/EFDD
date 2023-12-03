@@ -9,10 +9,11 @@ public class Game {
     Container con;
 
     // Panels for different sections of the game
-    JPanel titleNamePanel, startButtonPanel, mainTextPanel, continueButtonPanel, ChapterOnePanel, EventOnePanel, chapterOneContinueButtonPanel;
+    JPanel titleNamePanel, startButtonPanel, mainTextPanel, continueButtonPanel, ChapterOnePanel, EventOnePanel, chapterOneContinueButtonPanel,
+    playerPanel;
 
     // Label and font for game title
-    JLabel titleNameLabel;
+    JLabel titleNameLabel, hpLabel, hpLabelNumber, weaponLabel, weaponLabelNumber;
     Font titleFont = new Font("Times New Roman", Font.PLAIN, 50);
 
     // Font for general text
@@ -110,6 +111,13 @@ public class Game {
         continueButton.setFont(normalFont);
         continueButtonPanel.add(continueButton);
         continueButton.addActionListener(cbhandler);
+
+        // Creating player health bar and weapon
+        playerPanel = new JPanel();
+        playerPanel.setBounds(140,15,1000,50);
+        playerPanel.setBackground(Color.blue);
+        playerPanel.setLayout(new GridLayout(1,4));
+        con.add(playerPanel);
     }
 
     // Method to create screen for Chapter One
@@ -159,7 +167,7 @@ public class Game {
 
         EventOnePanel = new JPanel();
         EventOnePanel.setBounds(80,150,1100,300);
-        EventOnePanel.setBackground(Color.blue);
+        EventOnePanel.setBackground(Color.black);
         con.add(EventOnePanel);
 
         // Text area setup
