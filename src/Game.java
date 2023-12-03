@@ -163,11 +163,18 @@ public class Game {
         con.add(EventOnePanel);
 
         // Text area setup
-        eventOneTextArea = new JTextArea("You wake up and find yourself in a caged cell with a guard in front of the cell door..." +
-                "\nYou notice that the guard didn't take your pocket knife concealed around your ankle\n" +
-                "Along side you, across the room is a kid around the age of 14\n" +
-                "Before you could say a word to him...a guard barges into the cell and tries to take the kid away.\n" +
-                "You have 2 choices...either leave the kid to be taken away...or help him...");
+        eventOneTextArea = new JTextArea(
+                "You wake up and find yourself in a caged cell with a guard in front of the cell door..." +
+                "\nYou notice that the guard didn't take your pocket knife concealed around your ankle \n" +
+                "Along side you, across the room is a kid around the age of 14 \n" +
+                "Before you could say a word to him...\n" +
+                        "A guard barges into the cell and tries to take the kid away. \n" +
+                "You have 2 choices...\n" +
+                        "Either leave the kid to be taken away...\n" +
+                        "Or help him...\n" +
+
+                "\n \n \nWhich do you choose?"
+        );
         eventOneTextArea.setBounds(100, 200, 810, 800);
         eventOneTextArea.setBackground(Color.black);
         eventOneTextArea.setForeground(Color.white);
