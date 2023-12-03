@@ -208,7 +208,7 @@ public class Game {
         );
 
         eventOneTextArea.setBounds(100, 200, 810, 800);
-        eventOneTextArea.setBackground(Color.blue);
+        eventOneTextArea.setBackground(Color.black);
         eventOneTextArea.setForeground(Color.white);
         eventOneTextArea.setFont(smallFont);
         eventOneTextArea.setLineWrap(true);
@@ -219,7 +219,7 @@ public class Game {
         // Option panels
         eventOneOptionsPanel = new JPanel();
         eventOneOptionsPanel.setBounds(1,500,590,50);
-        eventOneOptionsPanel.setBackground(Color.red);
+        eventOneOptionsPanel.setBackground(Color.black);
 
         //option 1
         optionOneButton = new JButton("Save the Kid");
@@ -234,7 +234,7 @@ public class Game {
         //option 2
         eventTwoOptionsPanel = new JPanel();
         eventTwoOptionsPanel.setBounds(38,550,680,50);
-        eventTwoOptionsPanel.setBackground(Color.green);
+        eventTwoOptionsPanel.setBackground(Color.black);
 
         optionTwoButton = new JButton("Leave the Kid to be taken away");
         optionTwoButton.setBackground(Color.black);
