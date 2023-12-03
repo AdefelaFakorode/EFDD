@@ -18,7 +18,7 @@ public class Game {
     // Font for general text
     Font normalFont = new Font("Times New Roman", Font.PLAIN, 30);
 
-    Font smallFont = new Font("Times New Roman", Font.PLAIN, 20);
+    Font smallFont = new Font("Times New Roman", Font.PLAIN, 22);
 
     // Buttons and text area
     JButton startButton, continueButton, chapterOneContinueButton;
@@ -47,7 +47,7 @@ public class Game {
         // Title panel setup
         titleNamePanel = new JPanel();
         titleNamePanel.setBounds(80, 150, 1100, 70);
-        titleNamePanel.setBackground(Color.blue);
+        titleNamePanel.setBackground(Color.black);
 
         // Game title label setup
         titleNameLabel = new JLabel("Escape From Dio's Dungeon");
@@ -61,7 +61,7 @@ public class Game {
 
         // Start button setup
         startButton = new JButton("START");
-        startButton.setBackground(Color.red);
+        startButton.setBackground(Color.black);
         startButton.setForeground(Color.white);
         startButton.setFont(normalFont);
         startButton.addActionListener(tshandler);
@@ -83,7 +83,7 @@ public class Game {
         // Main text panel setup
         mainTextPanel = new JPanel();
         mainTextPanel.setBounds(80, 150, 1100, 120);
-        mainTextPanel.setBackground(Color.blue);
+        mainTextPanel.setBackground(Color.black);
         con.add(mainTextPanel);
 
         // Main text area setup
@@ -97,7 +97,7 @@ public class Game {
 
         continueButtonPanel = new JPanel();
         continueButtonPanel.setBounds(520, 500, 200, 100);
-        continueButtonPanel.setBackground(Color.red);
+        continueButtonPanel.setBackground(Color.black);
         continueButtonPanel.setForeground(Color.white);
         continueButtonPanel.setFont(normalFont);
 
@@ -121,7 +121,7 @@ public class Game {
         // Chapter one panel setup
         ChapterOnePanel = new JPanel();
         ChapterOnePanel.setBounds(400, 250, 450, 80);
-        ChapterOnePanel.setBackground(Color.blue);
+        ChapterOnePanel.setBackground(Color.black);
         con.add(ChapterOnePanel);
 
         // Chapter one label setup
@@ -133,13 +133,13 @@ public class Game {
         // Chapter one conti button panel setup
         chapterOneContinueButtonPanel = new JPanel();
         chapterOneContinueButtonPanel.setBounds(520, 500, 200, 60);
-        chapterOneContinueButtonPanel.setBackground(Color.red);
+        chapterOneContinueButtonPanel.setBackground(Color.black);
         chapterOneContinueButtonPanel.setForeground(Color.white);
         chapterOneContinueButtonPanel.setFont(normalFont);
 
         // Chapter one cont button setup
         chapterOneContinueButton = new JButton("CONTINUE");
-        chapterOneContinueButton.setBackground(Color.red);
+        chapterOneContinueButton.setBackground(Color.black);
         chapterOneContinueButton.setForeground(Color.white);
         chapterOneContinueButton.setFont(normalFont);
         chapterOneContinueButton.addActionListener(cc1handler);
@@ -173,7 +173,7 @@ public class Game {
                         "Either leave the kid to be taken away...\n" +
                         "Or help him...\n" +
 
-                "\n \n \nWhich do you choose?"
+                "\n \nWhich do you choose?"
         );
         eventOneTextArea.setBounds(100, 200, 810, 800);
         eventOneTextArea.setBackground(Color.black);
@@ -181,8 +181,6 @@ public class Game {
         eventOneTextArea.setFont(smallFont);
         eventOneTextArea.setLineWrap(true);
         EventOnePanel.add(eventOneTextArea);
-
-        //which do you choose?
 
         //option 1
 
