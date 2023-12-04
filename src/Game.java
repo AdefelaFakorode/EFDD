@@ -222,12 +222,16 @@ public class Game {
         eventOneOptionsPanel.setBackground(Color.black);
 
         //option 1
+        /*
         optionOneButton = new JButton("Save the Kid");
         optionOneButton.setBackground(Color.black);
         optionOneButton.setForeground(Color.white);
         optionOneButton.setFont(smallFont);
         optionOneButton.addActionListener(o1handler);
-        eventOneOptionsPanel.add(optionOneButton);
+        */
+        //Updated button method
+        JButton option1 = ChoiceButton1("Save the Kid", o1handler);
+        eventOneOptionsPanel.add(option1);
 
         con.add(eventOneOptionsPanel);
 
@@ -283,6 +287,25 @@ public class Game {
         public void actionPerformed(ActionEvent event){
             EventOneScreen();
         }
+    }
+
+    public JButton ChoiceButton1(String text, OptionOneHandler handler) {
+        JButton button;
+        button = new JButton(text);
+        button.setBackground(Color.black);
+        button.setForeground(Color.white);
+        button.setFont(smallFont);
+        button.addActionListener(handler);
+        return button;
+    }
+    public JButton ChoiceButton2(String text, OptionTwoHandler handler) {
+        JButton button;
+        button = new JButton(text);
+        button.setBackground(Color.black);
+        button.setForeground(Color.white);
+        button.setFont(smallFont);
+        button.addActionListener(handler);
+        return button;
     }
 
 }
