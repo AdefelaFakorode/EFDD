@@ -12,6 +12,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.File;
+import java.io.IOException;
+import java.util.Random;
+
 public class Game {
 
     JFrame window;
@@ -73,8 +82,8 @@ public class Game {
         window.setVisible(true);
     }
 
-    // modify this later to play differently each time 
-     public void playRandomSoundtrack() {
+    // modify this later to play differently each time
+    public void playRandomSoundtrack() {
         try {
             // array of soundtracks
             String[] soundtracks = {"music1.wav" /* other music files */};
@@ -101,7 +110,7 @@ public class Game {
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             e.printStackTrace();
         }
-     }
+    }
 
     public void createGameScreen(){
         titleNamePanel.setVisible(false);
