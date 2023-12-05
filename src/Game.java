@@ -20,6 +20,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
+import javax.sound.sampled.FloatControl;
 
 public class Game {
 
@@ -101,6 +102,12 @@ public class Game {
 
             // open audio input stream
             clip.open(audioIn);
+
+            // Volume control
+            FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            double gain = 0.1; // Range from 0.0 (silence) to 1.0 (full volume)
+            float dB = (float) (Math.log(gain) / Math.log(10.0) * 20.0);
+            gainControl.setValue(dB);
 
             // loop continuously
             clip.loop(Clip.LOOP_CONTINUOUSLY);
