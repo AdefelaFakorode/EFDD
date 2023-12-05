@@ -20,7 +20,6 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
-import javax.sound.sampled.FloatControl;
 
 public class Game {
 
@@ -32,11 +31,12 @@ public class Game {
     Font normalFont = new Font("Times New Roman", Font.PLAIN, 28);
     JButton startButton, choice1, choice2, choice3, choice4;
     JTextArea mainTextArea;
-    int playerHP, monsterHP, silverRing;
-    String weapon, position;
+    int  monsterHP, silverRing, playerHP;
+    String  position, weapon;
 
     TitleScreenHandler tsHandler = new TitleScreenHandler();
     ChoiceHandler choiceHandler = new ChoiceHandler();
+
 
 
 
@@ -59,7 +59,7 @@ public class Game {
         titleNamePanel = new JPanel();
         titleNamePanel.setBounds(100, 100, 600, 150);
         titleNamePanel.setBackground(Color.black);
-        titleNameLabel = new JLabel("ADVENTURE");
+        titleNameLabel = new JLabel("New Arrival");
         titleNameLabel.setForeground(Color.white);
         titleNameLabel.setFont(titleFont);
 
@@ -103,12 +103,6 @@ public class Game {
             // open audio input stream
             clip.open(audioIn);
 
-            // Volume control
-            FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            double gain = 0.1; // Range from 0.0 (silence) to 1.0 (full volume)
-            float dB = (float) (Math.log(gain) / Math.log(10.0) * 20.0);
-            gainControl.setValue(dB);
-
             // loop continuously
             clip.loop(Clip.LOOP_CONTINUOUSLY);
 
@@ -127,7 +121,7 @@ public class Game {
         mainTextPanel.setBounds(100, 100, 600, 250);
         mainTextPanel.setBackground(Color.black);
         con.add(mainTextPanel);
-        mainTextArea = new JTextArea("This is the main text are. This game is going to be great. I'm sure of it!!!!!!!");
+        mainTextArea = new JTextArea("main text area");
         mainTextArea.setBounds(100, 100, 600, 250);
         mainTextArea.setBackground(Color.black);
         mainTextArea.setForeground(Color.white);
@@ -205,28 +199,31 @@ public class Game {
         playerSetup();
 
     }
+
+    Character player = new Character("Player", 15, "Knife");
     public void playerSetup(){
 
-        playerHP = 15;
         monsterHP = 20;
         weapon = "Knife";
+        playerHP = player.getHP();
         weaponLabelName.setText(weapon);
         hpLabelNumber.setText("" + playerHP);
 
         townGate();
     }
 
+
     public void townGate(){
         position = "townGate";
-        mainTextArea.setText("You are at the gate of the town. \nA guard is standing in front of you. \n\nWhat do you do?");
-        choice1.setText("Talk to the guard");
+        mainTextArea.setText("You arrive at the gate of a town. \nA guard is standing in front of you. \n\nWhat do you do?");
+        choice1.setText("Approach the guard");
         choice2.setText("Attack the guard");
-        choice3.setText("Leave");
+        choice3.setText("Turn back around");
         choice4.setText("");
     }
     public void talkGuard(){
         position = "talkGuard";
-        mainTextArea.setText("Guard: Hello stranger. I have never seen your face. \nI'm sorry but we cannot let a stranger enter our town.");
+        mainTextArea.setText("Guard: Hello stranger. You must be new here. \nThe gate is currently closed due to a monster roaming around nearby \n I'm sorry but we cannot let you in at this time.");
         choice1.setText(">");
         choice2.setText("");
         choice3.setText("");
@@ -234,9 +231,8 @@ public class Game {
     }
     public void attackGuard(){
         position = "attackGuard";
-        mainTextArea.setText("Guard: Hey don't be stupid!\n\nThe guard fought back and hit you hard.\n(You receive 3 damage)");
-        //playerHP = playerHP -3;
-        playerHP -=3;
+        mainTextArea.setText("Guard: Hey don't be stupid!\n\nThe guard fought back and hit you hard.\n(You take 3 damage)");
+        player.setHP(playerHP-=3);
         hpLabelNumber.setText(""+playerHP);
         choice1.setText(">");
         choice2.setText("");
@@ -248,7 +244,7 @@ public class Game {
         mainTextArea.setText("You are at a crossroad.\nIf you go south, you will go back to the town.");
         choice1.setText("Go north");
         choice2.setText("Go east");
-        choice3.setText("Go south");
+        choice3.setText("Go south, back to town");
         choice4.setText("Go west");
     }
     public void north(){
@@ -263,8 +259,8 @@ public class Game {
     }
     public void east(){
         position = "east";
-        mainTextArea.setText("You walked into a forest and found a Long Sword!\n\n(You obtained a Long Sword)");
-        weapon = "Long Sword";
+        mainTextArea.setText("You walked into a forest and found a Greatsword!\n\n(You obtained a Greatword)");
+        weapon = "Greatsword";
         weaponLabelName.setText(weapon);
         choice1.setText("Go west");
         choice2.setText("");
@@ -272,17 +268,26 @@ public class Game {
         choice4.setText("");
 
     }
+
+    public void bush() {
+        position = "bush";
+        mainTextArea.setText("You stumble across a rustling bush");
+        choice1.setText("Reach into the bush");
+        choice2.setText("Head back");
+        choice3.setText("");
+        choice4.setText("");
+    }
     public void west(){
         position = "west";
-        mainTextArea.setText("You encounter a goblin!");
-        choice1.setText("Fight");
+        mainTextArea.setText("A goblin jumps out and prepares to fight you");
+        choice1.setText("Fight back");
         choice2.setText("Run");
         choice3.setText("");
         choice4.setText("");
     }
     public void fight(){
         position = "fight";
-        mainTextArea.setText("Monter HP: " + monsterHP + "\n\nWhat do you do?");
+        mainTextArea.setText("Monster HP: " + monsterHP + "\n\nWhat do you do?");
         choice1.setText("Attack");
         choice2.setText("Run");
         choice3.setText("");
@@ -296,11 +301,11 @@ public class Game {
         if(weapon.equals("Knife")){
             playerDamage = new java.util.Random().nextInt(3);
         }
-        else if(weapon.equals("Long Sword")){
-            playerDamage = new java.util.Random().nextInt(12);
+        else if(weapon.equals("Greatsword")){
+            playerDamage = new java.util.Random().nextInt(3, 13);
         }
 
-        mainTextArea.setText("You attacked the monster and gave " + playerDamage + " damage!");
+        mainTextArea.setText("You attacked the monster and dealt " + playerDamage + " damage!");
 
         monsterHP = monsterHP - playerDamage;
 
@@ -316,7 +321,7 @@ public class Game {
 
         monsterDamage = new java.util.Random().nextInt(6);
 
-        mainTextArea.setText("The monster attacked you and gave " + monsterDamage + " damage!");
+        mainTextArea.setText("The monster attacked you and dealt " + monsterDamage + " damage!");
 
         playerHP = playerHP - monsterDamage;
         hpLabelNumber.setText(""+playerHP);
@@ -342,7 +347,7 @@ public class Game {
     public void lose(){
         position = "lose";
 
-        mainTextArea.setText("You are dead!\n\nGAME OVER");
+        mainTextArea.setText("You have been slain!\n\nGAME OVER");
 
         choice1.setText("");
         choice2.setText("");
@@ -356,8 +361,7 @@ public class Game {
     public void ending(){
         position = "ending";
 
-        mainTextArea.setText("Guard: Oh you killed that goblin!?\nThank you so much. You are true hero!\nWelcome to our town!\n\nTHE END");
-
+        mainTextArea.setText("Guard:  You killed the goblin?\n*You show the silver ring* \nWOW! You really did. Thanks to you we can open our gates back up, please come in. \n\n YOU HAVE WON");
         choice1.setText("");
         choice2.setText("");
         choice3.setText("");
@@ -423,7 +427,7 @@ public class Game {
                         case "c1": north(); break;
                         case "c2": east();break;
                         case "c3": townGate(); break;
-                        case "c4": west();break;
+                        case "c4": bush();break;
                     }
                     break;
                 case "north":
@@ -434,6 +438,12 @@ public class Game {
                 case "east":
                     switch(yourChoice){
                         case "c1": crossRoad(); break;
+                    }
+                    break;
+                case "bush":
+                    switch(yourChoice){
+                        case "c1": west(); break;
+                        case "c2": crossRoad(); break;
                     }
                     break;
                 case "west":
