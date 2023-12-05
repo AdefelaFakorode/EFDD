@@ -44,6 +44,7 @@ public class Game {
         window.getContentPane().setBackground(Color.black);
         window.setLayout(null);
         con = window.getContentPane();
+        playRandomSoundtrack();
 
         titleNamePanel = new JPanel();
         titleNamePanel.setBounds(100, 100, 600, 150);
@@ -71,6 +72,36 @@ public class Game {
 
         window.setVisible(true);
     }
+
+    // modify this later to play differently each time 
+     public void playRandomSoundtrack() {
+        try {
+            // array of soundtracks
+            String[] soundtracks = {"music1.wav" /* other music files */};
+
+            // choosing a random soundtrack, can change this to a logical vers that takes in soundtrack name later, easier for demo.
+            Random random = new Random();
+            String soundtrack = soundtracks[random.nextInt(soundtracks.length)];
+
+            // open music file
+            File soundFile = new File("./public/" + soundtrack); // Update with the correct path
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
+
+            // get a sound clip resource
+            Clip clip = AudioSystem.getClip();
+
+            // open audio input stream
+            clip.open(audioIn);
+
+            // loop continuously
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+
+            // start playing
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
+     }
 
     public void createGameScreen(){
         titleNamePanel.setVisible(false);
