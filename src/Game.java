@@ -28,7 +28,6 @@ public class Game {
     TitleScreenHandler tsHandler = new TitleScreenHandler();
     ChoiceHandler choiceHandler = new ChoiceHandler();
 
-    ImageIcon logo = new ImageIcon(".//res//jackfrost.jpg");
 
 
 
@@ -44,7 +43,6 @@ public class Game {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.getContentPane().setBackground(Color.black);
         window.setLayout(null);
-        window.setIconImage(logo.getImage());
         con = window.getContentPane();
 
         titleNamePanel = new JPanel();
@@ -363,7 +361,14 @@ public class Game {
                     break;
                 case "attackGuard":
                     switch(yourChoice){
-                        case "c1": townGate(); break;
+                        case "c1":
+                            if(playerHP <1 ){
+                                lose();
+                            }
+                            else{
+                                townGate();
+                            }
+                            break;
                     }
                     break;
                 case "crossRoad":
