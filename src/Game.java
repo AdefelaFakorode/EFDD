@@ -1,311 +1,435 @@
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 public class Game {
-    // Main game window and containers
+
     JFrame window;
     Container con;
-
-    // Panels for different sections of the game
-    JPanel titleNamePanel, startButtonPanel, mainTextPanel, continueButtonPanel, ChapterOnePanel, EventOnePanel,
-            chapterOneContinueButtonPanel, playerPanel, eventOneOptionsPanel, eventTwoOptionsPanel;
-
-    // Label and font for game title
+    JPanel titleNamePanel, startButtonPanel, mainTextPanel, choiceButtonPanel, playerPanel;
     JLabel titleNameLabel, hpLabel, hpLabelNumber, weaponLabel, weaponLabelName;
-    Font titleFont = new Font("Times New Roman", Font.PLAIN, 50);
+    Font titleFont = new Font("Times New Roman", Font.PLAIN, 90);
+    Font normalFont = new Font("Times New Roman", Font.PLAIN, 28);
+    JButton startButton, choice1, choice2, choice3, choice4;
+    JTextArea mainTextArea;
+    int playerHP, monsterHP, silverRing;
+    String weapon, position;
 
-    // Font for general text
-    Font normalFont = new Font("Times New Roman", Font.PLAIN, 30);
+    TitleScreenHandler tsHandler = new TitleScreenHandler();
+    ChoiceHandler choiceHandler = new ChoiceHandler();
 
-    Font smallFont = new Font("Times New Roman", Font.PLAIN, 22);
+    ImageIcon logo = new ImageIcon(".//res//jackfrost.jpg");
 
-    // Buttons and text area
-    JButton startButton, continueButton, chapterOneContinueButton,
-    optionOneButton, optionTwoButton;
-    JTextArea mainTextArea, eventOneTextArea;
 
-    int playerHP;
-    String weapon;
 
-    // Action listeners for handling button clicks
-    TitleScreenHandler tshandler = new TitleScreenHandler();
-    ContinueButtonHandler cbhandler = new ContinueButtonHandler();
-    ChapterOneContinueHandler cc1handler = new ChapterOneContinueHandler();
-    OptionOneHandler o1handler = new OptionOneHandler();
-
-    OptionTwoHandler o2handler = new OptionTwoHandler();
     public static void main(String[] args) {
+
         new Game();
     }
 
-    // Constructor to create the game window and set up initial settings
-    public Game() {
-        // Creating window for the game
+    public Game(){
+
         window = new JFrame();
-        window.setSize(1280, 720);
+        window.setSize(800, 600);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.getContentPane().setBackground(Color.black);
         window.setLayout(null);
-        window.setVisible(true);
+        window.setIconImage(logo.getImage());
         con = window.getContentPane();
 
-        // Title panel setup
         titleNamePanel = new JPanel();
-        titleNamePanel.setBounds(80, 150, 1100, 70);
+        titleNamePanel.setBounds(100, 100, 600, 150);
         titleNamePanel.setBackground(Color.black);
-
-        // Game title label setup
-        titleNameLabel = new JLabel("Escape From Dio's Dungeon");
+        titleNameLabel = new JLabel("ADVENTURE");
         titleNameLabel.setForeground(Color.white);
         titleNameLabel.setFont(titleFont);
 
-        // Start button panel setup
         startButtonPanel = new JPanel();
-        startButtonPanel.setBounds(520, 500, 200, 100);
+        startButtonPanel.setBounds(300, 400, 200, 100);
         startButtonPanel.setBackground(Color.black);
 
-        // Start button setup
         startButton = new JButton("START");
         startButton.setBackground(Color.black);
         startButton.setForeground(Color.white);
         startButton.setFont(normalFont);
-        startButton.addActionListener(tshandler);
+        startButton.addActionListener(tsHandler);
+        startButton.setFocusPainted(false);
 
-        // Adding components to their respective panels
         titleNamePanel.add(titleNameLabel);
         startButtonPanel.add(startButton);
 
-        // Adding panels to the main container
         con.add(titleNamePanel);
         con.add(startButtonPanel);
+
+        window.setVisible(true);
     }
 
-    // Method to create the main game screen
-    public void GameScreen() {
+    public void createGameScreen(){
         titleNamePanel.setVisible(false);
         startButtonPanel.setVisible(false);
 
-        // Main text panel setup
         mainTextPanel = new JPanel();
-        mainTextPanel.setBounds(80, 150, 1100, 120);
+        mainTextPanel.setBounds(100, 100, 600, 250);
         mainTextPanel.setBackground(Color.black);
         con.add(mainTextPanel);
-
-        // Main text area setup
-        mainTextArea = new JTextArea("Trapped in Dio's Dungeon, rely on your wit and courage to navigate puzzles and evade traps, ensuring your escape with your life intact.");
-        mainTextArea.setBounds(100, 200, 810, 850);
+        mainTextArea = new JTextArea("This is the main text are. This game is going to be great. I'm sure of it!!!!!!!");
+        mainTextArea.setBounds(100, 100, 600, 250);
         mainTextArea.setBackground(Color.black);
         mainTextArea.setForeground(Color.white);
         mainTextArea.setFont(normalFont);
         mainTextArea.setLineWrap(true);
+        mainTextArea.setWrapStyleWord(true);
+        mainTextArea.setEditable(false);
+
         mainTextPanel.add(mainTextArea);
 
-        continueButtonPanel = new JPanel();
-        continueButtonPanel.setBounds(520, 500, 200, 100);
-        continueButtonPanel.setBackground(Color.black);
-        continueButtonPanel.setForeground(Color.white);
-        continueButtonPanel.setFont(normalFont);
+        choiceButtonPanel = new JPanel();
+        choiceButtonPanel.setBounds(250, 350, 300, 150);
+        choiceButtonPanel.setBackground(Color.black);
+        choiceButtonPanel.setLayout(new GridLayout(4,1));
+        con.add(choiceButtonPanel);
+        choice1 = new JButton("Choice 1");
+        choice1.setBackground(Color.black);
+        choice1.setForeground(Color.white);
+        choice1.setFont(normalFont);
+        choice1.setFocusPainted(false);
+        choice1.addActionListener(choiceHandler);
+        choice1.setActionCommand("c1");
+        choiceButtonPanel.add(choice1);
+        choice2 = new JButton("Choice 2");
+        choice2.setBackground(Color.black);
+        choice2.setForeground(Color.white);
+        choice2.setFont(normalFont);
+        choice2.setFocusPainted(false);
+        choice2.addActionListener(choiceHandler);
+        choice2.setActionCommand("c2");
+        choiceButtonPanel.add(choice2);
+        choice3 = new JButton("Choice 3");
+        choice3.setBackground(Color.black);
+        choice3.setForeground(Color.white);
+        choice3.setFont(normalFont);
+        choice3.setFocusPainted(false);
+        choice3.addActionListener(choiceHandler);
+        choice3.setActionCommand("c3");
+        choiceButtonPanel.add(choice3);
+        choice4 = new JButton("Choice 4");
+        choice4.setBackground(Color.black);
+        choice4.setForeground(Color.white);
+        choice4.setFont(normalFont);
+        choice4.setFocusPainted(false);
+        choice4.addActionListener(choiceHandler);
+        choice4.setActionCommand("c4");
+        choiceButtonPanel.add(choice4);
 
-        // Adding panel button panel to container
-        con.add(continueButtonPanel);
+//		choice4.setContentAreaFilled(false);  // Disable highlighting on press!!!
 
-        continueButton = new JButton("CONTINUE");
-        continueButton.setBackground(Color.black);
-        continueButton.setForeground(Color.white);
-        continueButton.setFont(normalFont);
-        continueButtonPanel.add(continueButton);
-        continueButton.addActionListener(cbhandler);
-    }
 
-    // Method to create screen for Chapter One
-    public void ChapterOneScreen() {
-        // Hide prev panels
-        mainTextPanel.setVisible(false);
-        continueButtonPanel.setVisible(false);
-
-        // Chapter one panel setup
-        ChapterOnePanel = new JPanel();
-        ChapterOnePanel.setBounds(400, 250, 450, 80);
-        ChapterOnePanel.setBackground(Color.black);
-        con.add(ChapterOnePanel);
-
-        // Chapter one label setup
-        JLabel chapterOneLabel = new JLabel("Chapter One: Exodus");
-        chapterOneLabel.setForeground(Color.white);
-        chapterOneLabel.setFont(titleFont);
-        ChapterOnePanel.add(chapterOneLabel);
-
-        // Chapter one conti button panel setup
-        chapterOneContinueButtonPanel = new JPanel();
-        chapterOneContinueButtonPanel.setBounds(520, 500, 200, 60);
-        chapterOneContinueButtonPanel.setBackground(Color.black);
-        chapterOneContinueButtonPanel.setForeground(Color.white);
-        chapterOneContinueButtonPanel.setFont(normalFont);
-
-        // Chapter one cont button setup
-        chapterOneContinueButton = new JButton("CONTINUE");
-        chapterOneContinueButton.setBackground(Color.black);
-        chapterOneContinueButton.setForeground(Color.white);
-        chapterOneContinueButton.setFont(normalFont);
-        chapterOneContinueButton.addActionListener(cc1handler);
-        chapterOneContinueButtonPanel.add(chapterOneContinueButton);
-
-        // Adding chapter one cont button panel to container
-        con.add(chapterOneContinueButtonPanel);
-    }
-
-    // Method to create the first event screen
-    public void EventOneScreen() {
-        ChapterOnePanel.setVisible(false);
-        chapterOneContinueButtonPanel.setVisible(false);
-        chapterOneContinueButton.setVisible(false);
-
-        // Creating player health bar and weapon
         playerPanel = new JPanel();
-        playerPanel.setBounds(180,15,1000,50);
+        playerPanel.setBounds(100, 15, 600, 50);
         playerPanel.setBackground(Color.black);
         playerPanel.setLayout(new GridLayout(1,4));
         con.add(playerPanel);
-        hpLabel = new JLabel("HP: ");
+        hpLabel = new JLabel("HP:");
         hpLabel.setFont(normalFont);
         hpLabel.setForeground(Color.white);
         playerPanel.add(hpLabel);
-        hpLabelNumber = new JLabel("10");
+        hpLabelNumber = new JLabel();
         hpLabelNumber.setFont(normalFont);
         hpLabelNumber.setForeground(Color.white);
         playerPanel.add(hpLabelNumber);
-
         weaponLabel = new JLabel("Weapon:");
         weaponLabel.setFont(normalFont);
         weaponLabel.setForeground(Color.white);
+        weaponLabel.setBackground(Color.red);
         playerPanel.add(weaponLabel);
         weaponLabelName = new JLabel();
         weaponLabelName.setFont(normalFont);
         weaponLabelName.setForeground(Color.white);
         playerPanel.add(weaponLabelName);
 
-        playerSetUp();
-
-        // Panel setup
-        EventOnePanel = new JPanel();
-        EventOnePanel.setBounds(80,150,1100,300);
-        EventOnePanel.setBackground(Color.black);
-        con.add(EventOnePanel);
-
-        // Text area setup
-        eventOneTextArea = new JTextArea(
-                "You wake up and find yourself in a caged cell with a guard in front of the cell door...\n" +
-                        "You notice that the guard didn't take your pocket knife concealed around your ankle.\n" +
-                        "Alongside you, across the room is a kid around the age of 14.\n" +
-                        "Before you could say a word to him...\n" +
-                        "A guard barges into the cell and tries to take the kid away.\n" +
-                        "You have two choices...\n" +
-                        "Either leave the kid to be taken away...\n" +
-                        "Or help him...\n\n" +
-                        "Which do you choose?"
-        );
-
-        eventOneTextArea.setBounds(100, 200, 810, 800);
-        eventOneTextArea.setBackground(Color.black);
-        eventOneTextArea.setForeground(Color.white);
-        eventOneTextArea.setFont(smallFont);
-        eventOneTextArea.setLineWrap(true);
-        EventOnePanel.add(eventOneTextArea);
-
-
-
-        // Option panels
-        eventOneOptionsPanel = new JPanel();
-        eventOneOptionsPanel.setBounds(1,500,590,50);
-        eventOneOptionsPanel.setBackground(Color.black);
-
-        //option 1
-        /*
-        optionOneButton = new JButton("Save the Kid");
-        optionOneButton.setBackground(Color.black);
-        optionOneButton.setForeground(Color.white);
-        optionOneButton.setFont(smallFont);
-        optionOneButton.addActionListener(o1handler);
-        */
-        //Updated button method
-        JButton option1 = ChoiceButton1("Save the Kid", o1handler);
-        eventOneOptionsPanel.add(option1);
-
-        con.add(eventOneOptionsPanel);
-
-        //option 2
-        eventTwoOptionsPanel = new JPanel();
-        eventTwoOptionsPanel.setBounds(38,550,680,50);
-        eventTwoOptionsPanel.setBackground(Color.black);
-
-        optionTwoButton = new JButton("Leave the Kid to be taken away");
-        optionTwoButton.setBackground(Color.black);
-        optionTwoButton.setForeground(Color.white);
-        optionTwoButton.setFont(smallFont);
-        optionTwoButton.addActionListener(o2handler);
-        eventTwoOptionsPanel.add(optionTwoButton);
-
-        con.add(eventTwoOptionsPanel);
-
+        playerSetup();
 
     }
+    public void playerSetup(){
 
-    public void playerSetUp(){
         playerHP = 15;
-        weapon = "Pocket-Knife";
+        monsterHP = 20;
+        weapon = "Knife";
         weaponLabelName.setText(weapon);
+        hpLabelNumber.setText("" + playerHP);
+
+        townGate();
     }
 
-    // Action listener class for handling button clicks
-    public class TitleScreenHandler implements ActionListener {
-        public void actionPerformed(ActionEvent event) {
-            GameScreen();
+    public void townGate(){
+        position = "townGate";
+        mainTextArea.setText("You are at the gate of the town. \nA guard is standing in front of you. \n\nWhat do you do?");
+        choice1.setText("Talk to the guard");
+        choice2.setText("Attack the guard");
+        choice3.setText("Leave");
+        choice4.setText("");
+    }
+    public void talkGuard(){
+        position = "talkGuard";
+        mainTextArea.setText("Guard: Hello stranger. I have never seen your face. \nI'm sorry but we cannot let a stranger enter our town.");
+        choice1.setText(">");
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+    public void attackGuard(){
+        position = "attackGuard";
+        mainTextArea.setText("Guard: Hey don't be stupid!\n\nThe guard fought back and hit you hard.\n(You receive 3 damage)");
+        //playerHP = playerHP -3;
+        playerHP -=3;
+        hpLabelNumber.setText(""+playerHP);
+        choice1.setText(">");
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+    public void crossRoad(){
+        position = "crossRoad";
+        mainTextArea.setText("You are at a crossroad.\nIf you go south, you will go back to the town.");
+        choice1.setText("Go north");
+        choice2.setText("Go east");
+        choice3.setText("Go south");
+        choice4.setText("Go west");
+    }
+    public void north(){
+        position = "north";
+        mainTextArea.setText("There is a river. \nYou drink the water and rest at the riverside. \n\n(Your HP is recovered by 2)");
+        playerHP = playerHP + 2;
+        hpLabelNumber.setText(""+playerHP);
+        choice1.setText("Go south");
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+    public void east(){
+        position = "east";
+        mainTextArea.setText("You walked into a forest and found a Long Sword!\n\n(You obtained a Long Sword)");
+        weapon = "Long Sword";
+        weaponLabelName.setText(weapon);
+        choice1.setText("Go west");
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+
+    }
+    public void west(){
+        position = "west";
+        mainTextArea.setText("You encounter a goblin!");
+        choice1.setText("Fight");
+        choice2.setText("Run");
+        choice3.setText("");
+        choice4.setText("");
+    }
+    public void fight(){
+        position = "fight";
+        mainTextArea.setText("Monter HP: " + monsterHP + "\n\nWhat do you do?");
+        choice1.setText("Attack");
+        choice2.setText("Run");
+        choice3.setText("");
+        choice4.setText("");
+    }
+    public void playerAttack(){
+        position = "playerAttack";
+
+        int playerDamage = 0;
+
+        if(weapon.equals("Knife")){
+            playerDamage = new java.util.Random().nextInt(3);
         }
-    }
-
-    public class ContinueButtonHandler implements ActionListener {
-        public void actionPerformed(ActionEvent event) {
-            ChapterOneScreen();
+        else if(weapon.equals("Long Sword")){
+            playerDamage = new java.util.Random().nextInt(12);
         }
+
+        mainTextArea.setText("You attacked the monster and gave " + playerDamage + " damage!");
+
+        monsterHP = monsterHP - playerDamage;
+
+        choice1.setText(">");
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+    public void monsterAttack(){
+        position = "monsterAttack";
+
+        int monsterDamage = 0;
+
+        monsterDamage = new java.util.Random().nextInt(6);
+
+        mainTextArea.setText("The monster attacked you and gave " + monsterDamage + " damage!");
+
+        playerHP = playerHP - monsterDamage;
+        hpLabelNumber.setText(""+playerHP);
+
+        choice1.setText(">");
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+    public void win(){
+        position = "win";
+
+        mainTextArea.setText("You defeated the monster!\nThe monster dropped a ring!\n\n(You obtained a Silver Ring)");
+
+        silverRing = 1;
+
+        choice1.setText("Go east");
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+
+    }
+    public void lose(){
+        position = "lose";
+
+        mainTextArea.setText("You are dead!\n\nGAME OVER");
+
+        choice1.setText("");
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+        choice1.setVisible(false);
+        choice2.setVisible(false);
+        choice3.setVisible(false);
+        choice4.setVisible(false);
+    }
+    public void ending(){
+        position = "ending";
+
+        mainTextArea.setText("Guard: Oh you killed that goblin!?\nThank you so much. You are true hero!\nWelcome to our town!\n\nTHE END");
+
+        choice1.setText("");
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+        choice1.setVisible(false);
+        choice2.setVisible(false);
+        choice3.setVisible(false);
+        choice4.setVisible(false);
     }
 
-    public class ChapterOneContinueHandler implements ActionListener {
-        public void actionPerformed(ActionEvent event) {
-            EventOneScreen();
-        }
-    }
 
-    public class OptionOneHandler implements ActionListener{
+
+
+    public class TitleScreenHandler implements ActionListener{
+
         public void actionPerformed(ActionEvent event){
-            EventOneScreen();
+
+            createGameScreen();
         }
     }
 
-    public class OptionTwoHandler implements ActionListener{
+
+    public class ChoiceHandler implements ActionListener{
+
         public void actionPerformed(ActionEvent event){
-            EventOneScreen();
-        }
-    }
 
-    public JButton ChoiceButton1(String text, OptionOneHandler handler) {
-        JButton button;
-        button = new JButton(text);
-        button.setBackground(Color.black);
-        button.setForeground(Color.white);
-        button.setFont(smallFont);
-        button.addActionListener(handler);
-        return button;
-    }
-    public JButton ChoiceButton2(String text, OptionTwoHandler handler) {
-        JButton button;
-        button = new JButton(text);
-        button.setBackground(Color.black);
-        button.setForeground(Color.white);
-        button.setFont(smallFont);
-        button.addActionListener(handler);
-        return button;
+            String yourChoice = event.getActionCommand();
+
+            switch(position){
+                case "townGate":
+                    switch(yourChoice){
+                        case "c1":
+                            if(silverRing==1){
+                                ending();
+                            }
+                            else{
+                                talkGuard();
+                            }
+                            break;
+                        case "c2": attackGuard();break;
+                        case "c3": crossRoad();break;
+                    }
+                    break;
+                case "talkGuard":
+                    switch(yourChoice){
+                        case "c1": townGate(); break;
+                    }
+                    break;
+                case "attackGuard":
+                    switch(yourChoice){
+                        case "c1": townGate(); break;
+                    }
+                    break;
+                case "crossRoad":
+                    switch(yourChoice){
+                        case "c1": north(); break;
+                        case "c2": east();break;
+                        case "c3": townGate(); break;
+                        case "c4": west();break;
+                    }
+                    break;
+                case "north":
+                    switch(yourChoice){
+                        case "c1": crossRoad(); break;
+                    }
+                    break;
+                case "east":
+                    switch(yourChoice){
+                        case "c1": crossRoad(); break;
+                    }
+                    break;
+                case "west":
+                    switch(yourChoice){
+                        case "c1": fight(); break;
+                        case "c2": crossRoad(); break;
+                    }
+                    break;
+                case "fight":
+                    switch(yourChoice){
+                        case "c1": playerAttack();break;
+                        case "c2": crossRoad(); break;
+                    }
+                    break;
+                case "playerAttack":
+                    switch(yourChoice){
+                        case "c1":
+                            if(monsterHP <1 ){
+                                win();
+                            }
+                            else{
+                                monsterAttack();
+                            }
+                            break;
+                    }
+                    break;
+                case "monsterAttack":
+                    switch(yourChoice){
+                        case "c1":
+                            if(playerHP <1 ){
+                                lose();
+                            }
+                            else{
+                                fight();
+                            }
+                            break;
+                    }
+                    break;
+                case "win":
+                    switch(yourChoice){
+                        case "c1": crossRoad();
+                    }
+                    break;
+
+            }
+
+
+        }
     }
 
 }
