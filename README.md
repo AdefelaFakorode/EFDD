@@ -1,2 +1,2 @@
-# Escape From Dio's Dungeon
-https://github.com/AdefelaFakorode/EFDD/assets/102834064/104419e8-91fe-4819-909b-129b42ad0caf
+# New Arrival
+https://github.com/AdefelaFakorode/EFDD/assets/102834064/3e5f5940-2a85-4f58-9e90-b91641087e68
